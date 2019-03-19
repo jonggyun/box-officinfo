@@ -13,6 +13,8 @@ import reducers from './modules/reducers';
 
 import * as serviceWorker from './serviceWorker';
 
+require('dotenv').config();
+
 const middlewares = [thunk, logger];
 
 const store = createStore(

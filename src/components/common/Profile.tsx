@@ -7,7 +7,6 @@ interface Props {
 class Profile extends Component<Props> {
   render() {
     const { name } = this.props;
-    console.log('name!!!!!!!!!');
     return (
       <React.Fragment>
         <div>프로필</div>

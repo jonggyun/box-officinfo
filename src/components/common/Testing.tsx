@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import { getDaily } from '../../lib/api/boxoffice';
 import { connect } from 'react-redux';
 
 import * as BoxofficeActions from '../../modules/boxoffice';
@@ -14,7 +13,8 @@ interface Props {
 class Test extends Component<Props> {
   componentDidMount() {
     const { getDaily } = this.props;
-    getDaily();
+    //getDaily();
+    //console.log('process', process.env.REACT_APP_API_KEY);
   }
 
   render() {

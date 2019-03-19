@@ -1,11 +1,16 @@
 import customApi from './customApi';
 
 const DEFAULT_ADD = 'boxoffice/';
-const API_KEY = 'key=570154ebefb74604c4d915f758a2f753';
+const API_KEY = `key=${process.env.REACT_APP_API_KEY}`;
 
-export const getDaily = () => {
-  console.log('api!!!');
+export const getDaily = (targetDt: string) => {
   return customApi.get(
-    `${DEFAULT_ADD}searchDailyBoxOfficeList.json?${API_KEY}&targetDt=20120101`
+    `${DEFAULT_ADD}searchDailyBoxOfficeList.json?${API_KEY}&targetDt=${targetDt}`
+  );
+};
+
+export const getWeekly = (targetDt: string) => {
+  return customApi.get(
+    `${DEFAULT_ADD}searchWeeklyBoxOfficeList.json?${API_KEY}&targetDt=${targetDt}`
   );
 };

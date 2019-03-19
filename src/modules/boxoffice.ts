@@ -1,5 +1,6 @@
 // imports
 import { Dispatch } from 'redux';
+import produce from 'immer';
 import * as api from '../lib/api/boxoffice';
 
 // actions
@@ -7,21 +8,20 @@ const GET_DAILY_REQUEST = 'boxoffice/GET_DAILY_REQUEST';
 const GET_DAILY_SUCCESS = 'boxoffice/GET_DAILY_SUCCESS';
 const GET_DAILY_FAIL = 'boxoffice/GET_DAILY_FAIL';
 
-const getDailyRequest = (payload: any) => ({
-  type: GET_DAILY_REQUEST,
-  payload,
-});
+const getDailyRequest = () => ({ type: GET_DAILY_REQUEST });
+
 const getDailySuccess = (payload: any) => ({
   type: GET_DAILY_SUCCESS,
   payload,
 });
-const getDailyFail = (payload: any) => ({ type: GET_DAILY_FAIL, payload });
+
+const getDailyFail = () => ({ type: GET_DAILY_FAIL });
 
 // api actions
 export const getDaily = () => {
   return async (dispatch: Dispatch) => {
     try {
-      const result = await api.getDaily();
+      const result = await api.getDaily('20190310');
       console.log('result', result);
       dispatch(getDailySuccess(result));
     } catch (e) {
@@ -34,25 +34,40 @@ export const getDaily = () => {
 //   readonly counter: number,
 //   readonly baseCurrency: string,
 // };
-type State = {};
+type State = {
+  type: string;
+  list: Object;
+};
 
 type Action = {
-  type: string[];
+  type: string;
   payload: Object;
 };
 
 // initial state
-const initalState: State = {};
+const initalState: State = {
+  type: '',
+  list: [],
+};
 
 // reducer
 const reducer = (state = initalState, action: Action): State => {
   switch (action.type) {
-    case [GET_DAILY_REQUEST]:
-      return { type: 'request', isLoading: action.payload };
-    case [GET_DAILY_SUCCESS]:
-      return { type: 'success', isLoading: action.payload };
-    case [GET_DAILY_FAIL]:
-      return { type: 'fail', isLoading: action.payload };
+    case GET_DAILY_REQUEST:
+      return produce(state, draft => {
+        draft.type = 'request';
+        draft.list = action;
+      });
+    case GET_DAILY_SUCCESS:
+      return produce(state, draft => {
+        draft.type = 'success';
+        draft.list = action.payload;
+      });
+    case GET_DAILY_FAIL:
+      return produce(state, draft => {
+        draft.type = 'fail';
+        draft.list = action;
+      });
     default:
       return state;
   }
