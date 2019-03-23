@@ -10,7 +10,7 @@ const GET_DAILY_FAIL = 'boxoffice/GET_DAILY_FAIL';
 
 const getDailyRequest = () => ({ type: GET_DAILY_REQUEST });
 
-const getDailySuccess = (payload: any) => ({
+export const getDailySuccess = (payload: any) => ({
   type: GET_DAILY_SUCCESS,
   payload,
 });
@@ -18,12 +18,12 @@ const getDailySuccess = (payload: any) => ({
 const getDailyFail = () => ({ type: GET_DAILY_FAIL });
 
 // api actions
-export const getDaily = () => {
+export const getDaily = (today: string) => {
   return async (dispatch: Dispatch) => {
     try {
-      const result = await api.getDaily('20190310');
-      console.log('result', result);
-      dispatch(getDailySuccess(result));
+      const result = await api.getDaily(today);
+
+      dispatch(getDailySuccess(result.data.boxOfficeResult.dailyBoxOfficeList));
     } catch (e) {
       console.log('err', e);
     }
@@ -34,9 +34,9 @@ export const getDaily = () => {
 //   readonly counter: number,
 //   readonly baseCurrency: string,
 // };
-type State = {
-  type: string;
-  list: Object;
+export type BoxofficeState = {
+  readonly type: string;
+  readonly list: Object;
 };
 
 type Action = {
@@ -45,13 +45,13 @@ type Action = {
 };
 
 // initial state
-const initalState: State = {
+const initalState: BoxofficeState = {
   type: '',
   list: [],
 };
 
 // reducer
-const reducer = (state = initalState, action: Action): State => {
+const reducer = (state = initalState, action: Action): BoxofficeState => {
   switch (action.type) {
     case GET_DAILY_REQUEST:
       return produce(state, draft => {

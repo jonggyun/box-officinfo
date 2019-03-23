@@ -14,14 +14,16 @@ const ListTitle = styled.div`
   font-weight: 800;
 `;
 
-const MovieList = styled.ul``;
+const MovieUl = styled.ul``;
 
-const MovieInfo = styled.li`
+const MovieLi = styled.li`
   display: flex;
-  justify-content: space-between;
-  height: 4.375rem;
+  justify-content: space-evenly;
+  height: 85px;
   border: 1px solid black;
+  margin-bottom: 15px;
 
+  /* 순위 */
   & > div:nth-child(1) {
     width: 70px;
     display: flex;
@@ -30,47 +32,90 @@ const MovieInfo = styled.li`
     padding-left: 5px;
 
     div:first-child {
-      font-size: 20px;
+      font-size: 25px;
+      text-align: center;
+      font-weight: bold;
     }
 
     div:last-child {
       font-size: 13px;
     }
   }
+  /* 제목 */
   & > div:nth-child(2) {
     font-size: 1.5rem;
+    margin-top: auto;
+    margin-bottom: auto;
   }
+
+  /* 정보 */
   & > div:nth-child(3) {
     text-align: right;
     min-width: 7.5rem;
     font-size: 0.8125rem;
     margin-top: auto;
-    margin-bottom: 0;
+    margin-bottom: 10px;
+    margin-right: 10px;
   }
 `;
 
 interface BoxofficeListProps {
   type: string;
+  boxoffice: {
+    type: string;
+    list: Array<{
+      movieCd: string;
+      rank: number;
+      rankInten: number;
+      rankOldAndNew: string;
+      movieNm: number;
+      openDt: string;
+      audiAcc: string;
+    }>;
+  };
 }
-const BoxofficeList: React.FC<BoxofficeListProps> = ({ type }) => {
+const BoxofficeList: React.FC<BoxofficeListProps> = ({ type, boxoffice }) => {
+  console.log('boxoffice!', boxoffice.list);
   return (
     <Boxoffice>
-      <ListTitle>Daily or Weekly</ListTitle>
-      <MovieList>
-        <MovieInfo>
-          <div>
-            <div>1</div>
-            <div>+ 10</div>
-          </div>
-          <div>세상에서 제일 긴 영화 이름은 무엇인가 부제까지 포함해서</div>
-          <div>
-            <div>2010.10.11 개봉</div>
-            <div>누적 11,000,000 명</div>
-          </div>
-        </MovieInfo>
-      </MovieList>
+      <ListTitle>{type === 'daily' ? 'Daily Chart' : 'Weekly Chart'}</ListTitle>
+      <MovieUl>
+        {boxoffice.type === 'success' &&
+          boxoffice.list.map(movie => (
+            <MovieComponent
+              key={movie.movieCd}
+              rank={movie.rank}
+              rankInten={movie.rankInten}
+              rankOldAndNew={movie.rankOldAndNew}
+              movieNm={movie.movieNm}
+              openDt={movie.openDt}
+              audiAcc={movie.audiAcc}
+            />
+          ))}
+      </MovieUl>
     </Boxoffice>
   );
 };
 
+interface MovieComponent {
+  rank: number;
+  rankInten: number;
+  rankOldAndNew: string;
+  movieNm: number;
+  openDt: string;
+  audiAcc: string;
+}
+const MovieComponent = (props: MovieComponent) => (
+  <MovieLi>
+    <div>
+      <div>{props.rank}</div>
+      <div>{props.rankInten}</div>
+    </div>
+    <div>{props.movieNm}</div>
+    <div>
+      <div>{props.openDt} 개봉</div>
+      <div>누적 {props.audiAcc}명</div>
+    </div>
+  </MovieLi>
+);
 export default BoxofficeList;

@@ -19,7 +19,7 @@ const middlewares = [thunk, logger];
 
 const store = createStore(
   reducers,
-  composeWithDevTools(applyMiddleware(...middlewares))
+  composeWithDevTools(applyMiddleware(...middlewares)),
 );
 
 ReactDOM.render(
@@ -28,7 +28,7 @@ ReactDOM.render(
       <App />
     </BrowserRouter>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change
