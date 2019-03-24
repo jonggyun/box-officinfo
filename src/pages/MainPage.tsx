@@ -17,8 +17,8 @@ const MainPage: React.SFC<MainPageProps> = props => {
     <MainTemplate>
       <MenuNavigator />
       <MainContent>
-        <BoxofficeListContainer />
-        <BoxofficeListContainer />
+        <BoxofficeListContainer type="daily" />
+        <BoxofficeListContainer type="weekly" />
       </MainContent>
     </MainTemplate>
   );

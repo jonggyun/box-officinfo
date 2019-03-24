@@ -2,7 +2,6 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 const Boxoffice = styled.article`
-  /* border: 1px solid black; */
   width: 31.25rem;
   margin: 0 2rem;
 `;
@@ -18,10 +17,12 @@ const MovieUl = styled.ul``;
 
 const MovieLi = styled.li`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   height: 85px;
-  border: 1px solid black;
-  margin-bottom: 15px;
+  /* border: 1px solid #8bc2bb; */
+  border-radius: 4px;
+  box-shadow: 2px 3px #d0e6e4;
+  margin-bottom: 30px;
 
   /* 순위 */
   & > div:nth-child(1) {
@@ -30,10 +31,10 @@ const MovieLi = styled.li`
     flex-direction: column;
     justify-content: space-around;
     padding-left: 5px;
+    text-align: center;
 
     div:first-child {
       font-size: 25px;
-      text-align: center;
       font-weight: bold;
     }
 
@@ -46,6 +47,7 @@ const MovieLi = styled.li`
     font-size: 1.5rem;
     margin-top: auto;
     margin-bottom: auto;
+    max-width: 55%;
   }
 
   /* 정보 */
@@ -61,37 +63,32 @@ const MovieLi = styled.li`
 
 interface BoxofficeListProps {
   type: string;
-  boxoffice: {
-    type: string;
-    list: Array<{
-      movieCd: string;
-      rank: number;
-      rankInten: number;
-      rankOldAndNew: string;
-      movieNm: number;
-      openDt: string;
-      audiAcc: string;
-    }>;
-  };
+  boxoffice: Array<{
+    movieCd: string;
+    rank: number;
+    rankInten: number;
+    rankOldAndNew: string;
+    movieNm: number;
+    openDt: string;
+    audiAcc: string;
+  }>;
 }
 const BoxofficeList: React.FC<BoxofficeListProps> = ({ type, boxoffice }) => {
-  console.log('boxoffice!', boxoffice.list);
   return (
     <Boxoffice>
       <ListTitle>{type === 'daily' ? 'Daily Chart' : 'Weekly Chart'}</ListTitle>
       <MovieUl>
-        {boxoffice.type === 'success' &&
-          boxoffice.list.map(movie => (
-            <MovieComponent
-              key={movie.movieCd}
-              rank={movie.rank}
-              rankInten={movie.rankInten}
-              rankOldAndNew={movie.rankOldAndNew}
-              movieNm={movie.movieNm}
-              openDt={movie.openDt}
-              audiAcc={movie.audiAcc}
-            />
-          ))}
+        {boxoffice.map(movie => (
+          <MovieComponent
+            key={movie.movieCd}
+            rank={movie.rank}
+            rankInten={movie.rankInten}
+            rankOldAndNew={movie.rankOldAndNew}
+            movieNm={movie.movieNm}
+            openDt={movie.openDt}
+            audiAcc={movie.audiAcc}
+          />
+        ))}
       </MovieUl>
     </Boxoffice>
   );
@@ -113,8 +110,8 @@ const MovieComponent = (props: MovieComponent) => (
     </div>
     <div>{props.movieNm}</div>
     <div>
-      <div>{props.openDt} 개봉</div>
-      <div>누적 {props.audiAcc}명</div>
+      <div>{props.openDt.replace(/-/g, '.')} 개봉</div>
+      <div>누적 {props.audiAcc.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}명</div>
     </div>
   </MovieLi>
 );

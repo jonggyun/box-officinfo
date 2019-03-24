@@ -4,26 +4,51 @@ import { format, subDays } from 'date-fns';
 
 import { RootState } from '../../modules/reducers';
 import BoxofficeList from '../../components/boxoffice/BoxofficeList';
-import { getDaily } from '../../modules/boxoffice';
+import { getDaily, getWeekly } from '../../modules/boxoffice';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 interface BoxofficeListContainerProps {
+  loading: boolean;
   getDaily: Function;
-  boxoffice: any;
+  getWeekly: Function;
+  daily: any;
+  weekly: any;
+  type: string;
 }
 const BoxofficeListContainer: React.FC<BoxofficeListContainerProps> = ({
+  loading,
   getDaily,
-  boxoffice,
+  getWeekly,
+  daily,
+  weekly,
+  type,
 }) => {
   useEffect(() => {
-    getDaily(format(subDays(new Date(), 1), 'YYYYMMDD'));
+    //getDaily(format(subDays(new Date(), 1), 'YYYYMMDD'));
+    type === 'daily'
+      ? getDaily(format(subDays(new Date(), 1), 'YYYYMMDD'))
+      : getWeekly(format(subDays(new Date(), 7), 'YYYYMMDD'));
   }, []);
-
-  return <BoxofficeList type="daily" boxoffice={boxoffice} />;
+  console.log('loading!!!', loading);
+  return (
+    <>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <BoxofficeList
+          type={type}
+          boxoffice={type === 'daily' ? daily : weekly}
+        />
+      )}
+    </>
+  );
 };
 
 export default connect(
   (state: RootState, props) => ({
-    boxoffice: state.boxoffice,
+    loading: state.boxoffice.loading,
+    daily: state.boxoffice.daily,
+    weekly: state.boxoffice.weekly,
   }),
-  { getDaily },
+  { getDaily, getWeekly },
 )(BoxofficeListContainer);

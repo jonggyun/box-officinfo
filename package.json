@@ -60,6 +60,7 @@
     "react-dom": "^16.8.4",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
+    "react-spinners": "^0.5.3",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
@@ -146,6 +147,9 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      "emotion"
     ]
   },
   "devDependencies": {
