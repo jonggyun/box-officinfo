@@ -24,12 +24,11 @@ const BoxofficeListContainer: React.FC<BoxofficeListContainerProps> = ({
   type,
 }) => {
   useEffect(() => {
-    //getDaily(format(subDays(new Date(), 1), 'YYYYMMDD'));
     type === 'daily'
       ? getDaily(format(subDays(new Date(), 1), 'YYYYMMDD'))
       : getWeekly(format(subDays(new Date(), 7), 'YYYYMMDD'));
   }, []);
-  console.log('loading!!!', loading);
+
   return (
     <>
       {loading ? (

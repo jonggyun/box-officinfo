@@ -1,7 +1,15 @@
 import React from 'react';
 import { Route } from 'react-router';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+  faArrowUp,
+  faArrowDown,
+  faMinus,
+} from '@fortawesome/free-solid-svg-icons';
 
 import MainPage from './pages/MainPage';
+
+library.add(faArrowUp, faArrowDown, faMinus);
 
 interface AppProps {}
 

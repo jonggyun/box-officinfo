@@ -1,9 +1,15 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { breakpoints } from '../../lib/styles/responsive';
 
 const Boxoffice = styled.article`
-  width: 31.25rem;
-  margin: 0 2rem;
+  color: #00423b;
+  margin: 0 1rem;
+  @media screen and (min-width: ${breakpoints.phone}) {
+    width: 31.25rem;
+    margin: 0 2rem;
+  }
 `;
 
 const ListTitle = styled.div`
@@ -18,28 +24,37 @@ const MovieUl = styled.ul``;
 const MovieLi = styled.li`
   display: flex;
   justify-content: space-between;
-  height: 85px;
-  /* border: 1px solid #8bc2bb; */
-  border-radius: 4px;
-  box-shadow: 2px 3px #d0e6e4;
-  margin-bottom: 30px;
+  height: 5.3125rem;
+  border-radius: 0.25rem;
+  border: 0.5px solid #d0e6e4;
+  box-shadow: 0.125rem 0.1875rem #8bc2bb;
+  margin-bottom: 1.875rem;
+  color: #004e45;
 
   /* 순위 */
   & > div:nth-child(1) {
-    width: 70px;
+    width: 4.375rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding-left: 5px;
+    padding-left: 0.3125rem;
     text-align: center;
-
+    @media screen and (max-width: ${breakpoints.desktop}) {
+      width: 3rem;
+    }
     div:first-child {
-      font-size: 25px;
+      font-size: 1.5625rem;
       font-weight: bold;
+      @media screen and (max-width: ${breakpoints.desktop}) {
+        font-size: 1.25rem;
+      }
     }
 
     div:last-child {
-      font-size: 13px;
+      font-size: 0.8125rem;
+      @media screen and (max-width: ${breakpoints.desktop}) {
+        font-size: 0.625rem;
+      }
     }
   }
   /* 제목 */
@@ -48,6 +63,12 @@ const MovieLi = styled.li`
     margin-top: auto;
     margin-bottom: auto;
     max-width: 55%;
+    @media screen and (max-width: ${breakpoints.desktop}) {
+      font-size: 1.125rem;
+    }
+    @media screen and (max-width: ${breakpoints.tablet}) {
+      font-size: 1rem;
+    }
   }
 
   /* 정보 */
@@ -56,9 +77,20 @@ const MovieLi = styled.li`
     min-width: 7.5rem;
     font-size: 0.8125rem;
     margin-top: auto;
-    margin-bottom: 10px;
-    margin-right: 10px;
+    margin-bottom: 0.625rem;
+    margin-right: 0.625rem;
+    color: #868e96;
+    @media screen and (max-width: ${breakpoints.desktop}) {
+      font-size: 0.625rem;
+      min-width: 0rem;
+    }
   }
+`;
+interface RankProps {
+  type: string;
+}
+const Rank = styled.span`
+  color: ${(props: RankProps) => (props.type === 'up' ? '#c92a2a' : '#1864ab')};
 `;
 
 interface BoxofficeListProps {
@@ -68,7 +100,7 @@ interface BoxofficeListProps {
     rank: number;
     rankInten: number;
     rankOldAndNew: string;
-    movieNm: number;
+    movieNm: string;
     openDt: string;
     audiAcc: string;
   }>;
@@ -98,7 +130,7 @@ interface MovieComponent {
   rank: number;
   rankInten: number;
   rankOldAndNew: string;
-  movieNm: number;
+  movieNm: string;
   openDt: string;
   audiAcc: string;
 }
@@ -106,9 +138,25 @@ const MovieComponent = (props: MovieComponent) => (
   <MovieLi>
     <div>
       <div>{props.rank}</div>
-      <div>{props.rankInten}</div>
+      <div>
+        {Number(props.rankInten) === 0 ? (
+          <FontAwesomeIcon icon="minus" />
+        ) : props.rankInten >= 0 ? (
+          <Rank type="up">
+            <FontAwesomeIcon icon="arrow-up" /> {Math.abs(props.rankInten)}
+          </Rank>
+        ) : (
+          <Rank type="down">
+            <FontAwesomeIcon icon="arrow-down" /> {Math.abs(props.rankInten)}
+          </Rank>
+        )}
+      </div>
     </div>
-    <div>{props.movieNm}</div>
+    <div>
+      {props.movieNm.length < 13
+        ? props.movieNm
+        : props.movieNm.slice(0, 13).concat('...')}
+    </div>
     <div>
       <div>{props.openDt.replace(/-/g, '.')} 개봉</div>
       <div>누적 {props.audiAcc.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}명</div>

@@ -2,13 +2,16 @@ import * as React from 'react';
 import styled from 'styled-components';
 import MainTemplate from '../components/main/MainTemplate';
 import MenuNavigator from '../components/common/MenuNavigator';
+import { breakpoints } from '../lib/styles/responsive';
 
-import BoxofficeList from '../components/boxoffice/BoxofficeList';
 import BoxofficeListContainer from '../containers/boxoffice/BoxofficeListContainer';
 
 const MainContent = styled.section`
   display: flex;
   justify-content: center;
+  @media screen and (max-width: ${breakpoints.phone}) {
+    flex-direction: column;
+  }
 `;
 
 interface MainPageProps {}
