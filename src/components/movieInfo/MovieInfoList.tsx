@@ -13,11 +13,58 @@ const Keyword = styled.input`
   }
 `;
 
+const MovieSection = styled.section`
+  margin-top: 1.25rem;
+`;
+
+const MovieComponent = styled.article`
+  width: 31.25rem;
+  border: 0.0625rem solid #d0e6e4;
+  border-radius: 0.1875rem;
+  box-shadow: 0.125rem 0.1875rem #8bc2bb;
+  color: #003731;
+  p {
+    margin: 0;
+    box-sizing: border-box;
+  }
+`;
+
+const MovieTitles = styled.div`
+  font-size: 1.5625rem;
+  font-weight: 800;
+  padding: 1rem;
+  p:last-child {
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+`;
+
+const MovieInfo = styled.div`
+  font-size: 0.75rem;
+  padding: 0.625rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
 interface MovieInfoListProps {
   keyword: string;
   setKeyword: Function;
   handleKeyPress: (e: React.KeyboardEvent) => void;
-  movies: Array<Object> | undefined;
+  movies:
+    | Array<{
+        movieCd: string;
+        movieNm: string;
+        movieNmEn: string;
+        openDt: string;
+        genreAlt: string;
+        directors:
+          | Array<{
+              peopleNm: string;
+            }>
+          | undefined;
+      }>
+    | undefined;
 }
 const MovieInfoList: React.SFC<MovieInfoListProps> = ({
   keyword,
@@ -33,14 +80,71 @@ const MovieInfoList: React.SFC<MovieInfoListProps> = ({
         onChange={e => setKeyword(e.target.value)}
         onKeyPress={handleKeyPress}
       />
-      <section>
+      <MovieSection>
         {movies && movies.length > 0 ? (
-          <div>결과 있지롱</div>
+          movies.map(movie => (
+            <MovieCard
+              key={movie.movieCd}
+              movieCd={movie.movieCd}
+              movieNm={movie.movieNm}
+              movieNmEn={movie.movieNmEn}
+              openDt={movie.openDt}
+              genreAlt={movie.genreAlt}
+              directors={movie.directors}
+            />
+          ))
         ) : (
           <DoNotHaveItem />
         )}
-      </section>
+      </MovieSection>
     </>
+  );
+};
+
+interface MovieCardProps {
+  movieCd: string;
+  movieNm: string;
+  movieNmEn: string;
+  openDt: string;
+  genreAlt: string;
+  directors:
+    | Array<{
+        peopleNm: string;
+      }>
+    | undefined;
+}
+const MovieCard: React.SFC<MovieCardProps> = ({
+  movieCd,
+  movieNm,
+  movieNmEn,
+  openDt,
+  genreAlt,
+  directors,
+}) => {
+  return (
+    <div>
+      <MovieComponent>
+        <MovieTitles>
+          <p>{movieNm}</p>
+          <p>{movieNmEn}</p>
+        </MovieTitles>
+        <MovieInfo>
+          <p>
+            감독:{' '}
+            {directors &&
+              directors.map((director, index) => {
+                console.log('length', directors.length - 1, index);
+                return directors.length - 1 === index
+                  ? director.peopleNm
+                  : director.peopleNm + ', ';
+              })}
+          </p>
+          <p>장르: {genreAlt}</p>
+          <p>개봉: {openDt}</p>
+        </MovieInfo>
+      </MovieComponent>
+      
+    </div>
   );
 };
 

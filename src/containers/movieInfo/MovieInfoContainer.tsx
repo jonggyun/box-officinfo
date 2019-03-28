@@ -9,7 +9,7 @@ import LoadingSpinner from '../../components/common/LoadingSpinner';
 interface MovieInfoContainerProps {
   type: string;
   loading: boolean;
-  movies: Array<Object> | undefined;
+  movies: Array<any> | undefined;
   getMovies: Function;
 }
 const MovieInfoContainer: React.SFC<MovieInfoContainerProps> = ({
@@ -17,7 +17,6 @@ const MovieInfoContainer: React.SFC<MovieInfoContainerProps> = ({
   getMovies,
 }) => {
   const [keyword, setKeyword] = useState('');
-  // const [movies, setMovies] = useState([]);
 
   const handleOnSubmit = () => {
     getMovies(keyword);
