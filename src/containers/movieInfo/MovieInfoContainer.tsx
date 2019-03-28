@@ -35,6 +35,7 @@ const MovieInfoContainer: React.SFC<MovieInfoContainerProps> = ({
       keyword={keyword}
       setKeyword={setKeyword}
       handleKeyPress={handleKeyPress}
+      movies={movies}
     />
   );
 };
