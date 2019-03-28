@@ -2,26 +2,30 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import { breakpoints } from '../../lib/styles/responsive';
+
 const NavItem = styled.nav`
   height: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #00423b;
-  margin-bottom: 20px;
   ul {
     display: flex;
     width: 40rem;
     justify-content: space-between;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: bold;
     color: #fff;
+    @media screen and (max-width: ${breakpoints.phone}) {
+      font-size: 0.875rem;
+    }
     li {
       cursor: pointer;
-      padding: 10px 10px;
-      border-bottom: 3px solid #00423b;
+      padding: 0.625rem 0.625rem;
+      border-bottom: 0.1875rem solid #00423b;
       &:hover {
-        border-bottom: 3px solid #fff;
+        border-bottom: 0.1875rem solid #fff;
       }
     }
   }

@@ -14,7 +14,7 @@ const Boxoffice = styled.article`
 
 const ListTitle = styled.div`
   text-align: center;
-  padding: 1.25rem 0;
+  margin: 1.875rem 0;
   font-size: 2rem;
   font-weight: 800;
 `;

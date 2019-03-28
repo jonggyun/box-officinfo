@@ -27,7 +27,7 @@ const BoxofficeListContainer: React.FC<BoxofficeListContainerProps> = ({
     type === 'daily'
       ? getDaily(format(subDays(new Date(), 1), 'YYYYMMDD'))
       : getWeekly(format(subDays(new Date(), 7), 'YYYYMMDD'));
-  }, []);
+  }, [type]);
 
   return (
     <>

@@ -8,17 +8,21 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import MainPage from './pages/MainPage';
+import BoxofficePage from './pages/BoxofficePage';
+import MovieInfoPage from './pages/MovieInfoPage';
 
 library.add(faArrowUp, faArrowDown, faMinus);
 
 interface AppProps {}
 
-const App: React.SFC<AppProps> = props => {
+const App: React.SFC<AppProps> = () => {
   return (
     <>
       <Route exact path="/" component={MainPage} />
-      {/* <Route path="/test" component={Test} />
-      <Route path="/test11" render={() => <div>aaaaaaaaaaaa</div>} /> */}
+      <Route exact path="/boxoffice" component={BoxofficePage} />
+      <Route exact path="/movie" component={MovieInfoPage} />
+      <Route exact path="/company" rendered={() => console.log('company')} />
+      <Route exact path="/person" rendered={() => console.log('person')} />
     </>
   );
 };
