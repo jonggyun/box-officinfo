@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import DoNotHaveItem from '../common/DoNotHaveItem';
 
@@ -27,12 +28,16 @@ const MovieComponent = styled.article`
     margin: 0;
     box-sizing: border-box;
   }
+  a {
+    color: inherit;
+  }
 `;
 
 const MovieTitles = styled.div`
   font-size: 1.5625rem;
   font-weight: 800;
   padding: 1rem;
+  cursor: pointer;
   p:last-child {
     font-size: 0.75rem;
     font-weight: 600;
@@ -124,23 +129,30 @@ const MovieCard: React.SFC<MovieCardProps> = ({
   return (
     <div>
       <MovieComponent>
-        <MovieTitles>
-          <p>{movieNm}</p>
-          <p>{movieNmEn}</p>
-        </MovieTitles>
+        <Link to={`movie/${movieCd}`}>
+          <MovieTitles>
+            <p>{movieNm}</p>
+            <p>{movieNmEn}</p>
+          </MovieTitles>
+        </Link>
         <MovieInfo>
           <p>
             감독:{' '}
-            {directors &&
-              directors.map((director, index) => {
-                console.log('length', directors.length - 1, index);
-                return directors.length - 1 === index
-                  ? director.peopleNm
-                  : director.peopleNm + ', ';
-              })}
+            {directors && directors.length > 0
+              ? directors.map((director, index) => {
+                  return directors.length - 1 === index
+                    ? director.peopleNm
+                    : director.peopleNm + ', ';
+                })
+              : '정보없음'}
           </p>
           <p>장르: {genreAlt}</p>
-          <p>개봉: {openDt}</p>
+          <p>
+            개봉:{' '}
+            {openDt
+              ? openDt.replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3')
+              : '정보없음'}
+          </p>
         </MovieInfo>
       </MovieComponent>
       

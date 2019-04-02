@@ -21,6 +21,7 @@ const App: React.SFC<AppProps> = () => {
       <Route exact path="/" component={MainPage} />
       <Route exact path="/boxoffice" component={BoxofficePage} />
       <Route exact path="/movie" component={MovieInfoPage} />
+      <Route exact path="/movie/:movieCd" component={MovieInfoPage} />
       <Route exact path="/company" rendered={() => console.log('company')} />
       <Route exact path="/person" rendered={() => console.log('person')} />
     </>

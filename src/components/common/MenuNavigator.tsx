@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { breakpoints } from '../../lib/styles/responsive';
 
 const NavItem = styled.nav`
-  height: 5rem;
+  height: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
