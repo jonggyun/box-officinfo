@@ -1,12 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import {
+  DirectorType,
+  ActorType,
+  ShowtypeType,
+  CompanyType,
+  AuditType,
+} from '../../lib/types/movieInfo';
+
 import ShowTypes from './detail/ShowTypes';
 import Genre from './detail/Genre';
 import Companies from './detail/Companies';
 import Directors from './detail/Directors';
 import Actors from './detail/Actors';
-import Staffs from './detail/Staffs';
+// import Staffs from './detail/Staffs';
 
 const Wrapper = styled.article`
   width: 37.5rem;
@@ -33,24 +41,54 @@ const TitleEN = styled.h3`
   color: #00423b;
 `;
 
-interface MovieDetailProps {}
-const MovieDetail: React.SFC<MovieDetailProps> = props => {
+interface MovieDetailProps {
+  movieInfo: {
+    movieNm: string;
+    movieNmEn: string;
+    showTm: number;
+    prdtYear: number;
+    openDt: string;
+    genres: Array<{
+      genreNm: string;
+    }>;
+    directors: Array<DirectorType>;
+    actors: Array<ActorType>;
+    showTypes: Array<ShowtypeType>;
+    companys: Array<CompanyType>;
+    audits: Array<AuditType>;
+  };
+}
+const MovieDetail: React.SFC<MovieDetailProps> = ({ movieInfo }) => {
+  const {
+    movieNm,
+    movieNmEn,
+    showTm,
+    prdtYear,
+    openDt,
+    genres,
+    directors,
+    actors,
+    showTypes,
+    companys,
+    audits,
+  } = movieInfo;
   return (
     <Wrapper>
       <TitleKR>
-        영화이름(한글)<span>(2019)</span>
+        {movieNm}
+        <span>({prdtYear})</span>
       </TitleKR>
-      <TitleEN>영화이름(영어)</TitleEN>
+      <TitleEN>{movieNmEn}</TitleEN>
       {/* showTypes */}
-      <ShowTypes />
+      <ShowTypes showTypes={showTypes} />
       {/* genre */}
-      <Genre />
+      <Genre genres={genres} showTm={showTm} openDt={openDt} />
       {/* company */}
-      <Companies />
+      <Companies companys={companys} />
       {/* directors */}
-      <Directors />
+      <Directors directors={directors} />
       {/* actors */}
-      <Actors />
+      <Actors actors={actors} />
       {/* staffs */}
       {/* <Staffs /> */}
     </Wrapper>

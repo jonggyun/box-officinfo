@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { DirectorType } from '../../../lib/types/movieInfo';
+
 import { movieInfo } from '../../../lib/styles/common';
 
 const Section = styled.section`
@@ -31,20 +33,20 @@ const Information = styled.dl`
   }
 `;
 
-interface DirectorsProps {}
-const Directors: React.SFC<DirectorsProps> = props => (
+interface DirectorsProps {
+  directors: Array<DirectorType>;
+}
+const Directors: React.SFC<DirectorsProps> = ({ directors }) => (
   <Section>
     <Title>Directors</Title>
     <UnderLine />
     <Wrapper>
-      <Information>
-        <dt>추창민</dt>
-        <dd>CHOO Chang-min</dd>
-      </Information>
-      <Information>
-        <dt>최창민</dt>
-        <dd>CHOI Chang-min</dd>
-      </Information>
+      {directors.map((director, index) => (
+        <Information key={index}>
+          <dt>{director.peopleNmEn}</dt>
+          <dd>{director.peopleNmEn}</dd>
+        </Information>
+      ))}
     </Wrapper>
   </Section>
 );

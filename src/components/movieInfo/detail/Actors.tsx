@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { ActorType } from '../../../lib/types/movieInfo';
+
 import { movieInfo } from '../../../lib/styles/common';
 
 const Section = styled.section`
@@ -49,42 +51,21 @@ const Cast = styled.dd`
   margin-top: 5px;
 `;
 
-interface ActorsProps {}
-const Actors: React.SFC<ActorsProps> = props => (
+interface ActorsProps {
+  actors: Array<ActorType>;
+}
+const Actors: React.SFC<ActorsProps> = ({ actors }) => (
   <Section>
     <Title>Actors</Title>
     <UnderLine />
     <Wrapper>
-      <ActorCard>
-        <ActorNmKR>이병헌이병헌이이병헌이병헌이병헌</ActorNmKR>
-        <ActorNmEN>LEE Byung-hun</ActorNmEN>
-        <Cast>광해/하선</Cast>
-      </ActorCard>
-      <ActorCard>
-        <ActorNmKR>이병헌</ActorNmKR>
-        <ActorNmEN>LEE Byung-hun</ActorNmEN>
-        <Cast>광해/하선</Cast>
-      </ActorCard>
-      <ActorCard>
-        <ActorNmKR>이병헌</ActorNmKR>
-        <ActorNmEN>LEE Byung-hun</ActorNmEN>
-        <Cast>광해/하선</Cast>
-      </ActorCard>
-      <ActorCard>
-        <ActorNmKR>이병헌</ActorNmKR>
-        <ActorNmEN>LEE Byung-hun</ActorNmEN>
-        <Cast>광해/하선</Cast>
-      </ActorCard>
-      <ActorCard>
-        <ActorNmKR>이병헌</ActorNmKR>
-        <ActorNmEN>LEE Byung-hun</ActorNmEN>
-        <Cast>광해/하선</Cast>
-      </ActorCard>
-      <ActorCard>
-        <ActorNmKR>이병헌</ActorNmKR>
-        <ActorNmEN>LEE Byung-hun</ActorNmEN>
-        <Cast>광해/하선</Cast>
-      </ActorCard>
+      {actors.map((actor, index) => (
+        <ActorCard key={index}>
+          <ActorNmKR>{actor.peopleNm}</ActorNmKR>
+          <ActorNmEN>{actor.peopleNmEn}</ActorNmEN>
+          <Cast>{actor.cast}</Cast>
+        </ActorCard>
+      ))}
     </Wrapper>
     {/* <div>more ....</div> */}
   </Section>

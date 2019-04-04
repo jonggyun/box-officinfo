@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { ShowtypeType } from '../../../lib/types/movieInfo';
+
 const Section = styled.section`
   margin-top: 0.8125rem;
   display: flex;
@@ -15,13 +17,14 @@ const ShowType = styled.div`
   font-size: 12px;
 `;
 
-interface ShowTypesProps {}
-const ShowTypes: React.SFC<ShowTypesProps> = props => (
+interface ShowTypesProps {
+  showTypes: Array<ShowtypeType>;
+}
+const ShowTypes: React.SFC<ShowTypesProps> = ({ showTypes }) => (
   <Section>
-    <ShowType>2D</ShowType>
-    <ShowType>3D</ShowType>
-    <ShowType>IMAX 3D</ShowType>
-    <ShowType>IMAX 4D</ShowType>
+    {showTypes.map((showType, index) => (
+      <ShowType key={index}>{showType.showTypeNm}</ShowType>
+    ))}
   </Section>
 );
 

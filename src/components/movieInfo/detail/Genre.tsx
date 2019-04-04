@@ -12,14 +12,20 @@ const Section = styled.section`
   }
 `;
 
-interface GenreProps {}
-const Genre: React.SFC<GenreProps> = props => (
+interface GenreProps {
+  genres: Array<{
+    genreNm: string;
+  }>;
+  showTm: number;
+  openDt: string;
+}
+const Genre: React.SFC<GenreProps> = ({ genres, showTm, openDt }) => (
   <Section>
-    <span>액션, 어드벤쳐, 스릴러</span>
+    <span>{genres.map(genre => `${genre.genreNm},`)}</span>
     <span> / </span>
-    <span>180분</span>
+    <span>{showTm}분</span>
     <span> / </span>
-    <span>2019.01.01 개봉</span>
+    <span>{openDt} 개봉</span>
   </Section>
 );
 

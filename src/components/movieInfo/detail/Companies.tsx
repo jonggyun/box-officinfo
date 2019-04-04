@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { CompanyType } from '../../../lib/types/movieInfo';
+
 import { movieInfo } from '../../../lib/styles/common';
 
 const Section = styled.section`
@@ -47,47 +49,21 @@ const NameEN = styled.dd`
   color: #00796b;
 `;
 
-interface CompaniesProps {}
-const Companies: React.SFC<CompaniesProps> = props => (
+interface CompaniesProps {
+  companys: Array<CompanyType>;
+}
+const Companies: React.SFC<CompaniesProps> = ({ companys }) => (
   <Section>
     <Title>Company</Title>
     <UnderLine />
     <Wrapper>
-      <CompanyCard>
-        <PartNm>제작사</PartNm>
-        <NameKR>리얼라이즈픽쳐스(주)</NameKR>
-        <NameEN>Realies Pictures, Inc.</NameEN>
-      </CompanyCard>
-      <CompanyCard>
-        <PartNm>제작사</PartNm>
-        <NameKR>리얼라이즈픽쳐스(주)</NameKR>
-        <NameEN>Realies Pictures, Inc.</NameEN>
-      </CompanyCard>
-      <CompanyCard>
-        <PartNm>제작사</PartNm>
-        <NameKR>리얼라이즈픽쳐스(주)</NameKR>
-        <NameEN>Realies Pictures, Inc.</NameEN>
-      </CompanyCard>
-      <CompanyCard>
-        <PartNm>제작사</PartNm>
-        <NameKR>리얼라이즈픽쳐스(주)</NameKR>
-        <NameEN>Realies Pictures, Inc.</NameEN>
-      </CompanyCard>
-      <CompanyCard>
-        <PartNm>제작사</PartNm>
-        <NameKR>리얼라이즈픽쳐스(주)</NameKR>
-        <NameEN>Realies Pictures, Inc.</NameEN>
-      </CompanyCard>
-      <CompanyCard>
-        <PartNm>제작사</PartNm>
-        <NameKR>리얼라이즈픽쳐스(주)</NameKR>
-        <NameEN>Realies Pictures, Inc.</NameEN>
-      </CompanyCard>
-      <CompanyCard>
-        <PartNm>제작사</PartNm>
-        <NameKR>리얼라이즈픽쳐스(주)</NameKR>
-        <NameEN>Realies Pictures, Inc.</NameEN>
-      </CompanyCard>
+      {companys.map((company, index) => (
+        <CompanyCard key={`${company.companyCd}${index}`}>
+          <PartNm>{company.companyPartNm}</PartNm>
+          <NameKR>{company.companyNm}</NameKR>
+          <NameEN>{company.companyNmEn}</NameEN>
+        </CompanyCard>
+      ))}
     </Wrapper>
   </Section>
 );
