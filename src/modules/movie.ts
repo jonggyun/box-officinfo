@@ -66,10 +66,10 @@ export const getMovieInfo = (movieCd: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(getMovieInfoRequest({ type: 'request', loading: true }));
-      console.log('getMovieInfo');
+
       const result = await api.getMovieInfo(movieCd);
-      console.log('result', result);
       const movieInfo = result.data.movieInfoResult.movieInfo;
+
       dispatch(
         getMovieInfoSuccess({ type: 'success', loading: false, movieInfo }),
       );

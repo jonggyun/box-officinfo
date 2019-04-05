@@ -21,11 +21,20 @@ interface GenreProps {
 }
 const Genre: React.SFC<GenreProps> = ({ genres, showTm, openDt }) => (
   <Section>
-    <span>{genres.map(genre => `${genre.genreNm},`)}</span>
+    <span>
+      {genres.map((genre, index) =>
+        genres.length - 1 === index ? `${genre.genreNm}` : `${genre.genreNm}, `,
+      )}
+    </span>
     <span> / </span>
     <span>{showTm}분</span>
     <span> / </span>
-    <span>{openDt} 개봉</span>
+    <span>
+      {openDt
+        ? openDt.replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3')
+        : '정보없음'}{' '}
+      개봉
+    </span>
   </Section>
 );
 

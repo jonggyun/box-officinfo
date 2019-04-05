@@ -43,7 +43,7 @@ const Directors: React.SFC<DirectorsProps> = ({ directors }) => (
     <Wrapper>
       {directors.map((director, index) => (
         <Information key={index}>
-          <dt>{director.peopleNmEn}</dt>
+          <dt>{director.peopleNm}</dt>
           <dd>{director.peopleNmEn}</dd>
         </Information>
       ))}

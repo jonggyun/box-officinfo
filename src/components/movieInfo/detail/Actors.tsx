@@ -24,7 +24,7 @@ const Wrapper = styled.div`
 
 const ActorCard = styled.dl`
   width: 7.625rem;
-  height: 5rem;
+  height: 4.375rem;
   padding: 0.5625rem;
   border: 1px solid #8bc2bb;
   border-radius: 0.3125rem;

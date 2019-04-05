@@ -36,20 +36,32 @@ interface MovieDetailContainerProps {
   // };
   movieInfo: any;
   getMovieInfo: Function;
+  loading: boolean;
 }
 const MovieDetailContainer: React.SFC<MovieDetailContainerProps> = ({
   movieCd,
   movieInfo,
   getMovieInfo,
+  loading,
 }) => {
   useEffect(() => {
     getMovieInfo(movieCd);
   }, [movieCd]);
 
+  useEffect(() => {
+    return () => {
+      getMovieInfo('');
+    };
+  }, []);
+
   return (
     <>
-      {Object.keys(movieInfo).length > 0 && (
-        <MovieDetail movieInfo={movieInfo} />
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        Object.keys(movieInfo).length > 0 && (
+          <MovieDetail movieInfo={movieInfo} />
+        )
       )}
     </>
   );
@@ -58,6 +70,7 @@ const MovieDetailContainer: React.SFC<MovieDetailContainerProps> = ({
 export default connect(
   (state: RootState, props) => ({
     movieInfo: state.movie.movieInfo,
+    loading: state.movie.loading,
   }),
   { getMovieInfo },
 )(MovieDetailContainer);

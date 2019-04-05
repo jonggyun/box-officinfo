@@ -76,7 +76,7 @@ const MovieDetail: React.SFC<MovieDetailProps> = ({ movieInfo }) => {
     <Wrapper>
       <TitleKR>
         {movieNm}
-        <span>({prdtYear})</span>
+        {prdtYear ? <span>({prdtYear})</span> : null}
       </TitleKR>
       <TitleEN>{movieNmEn}</TitleEN>
       {/* showTypes */}
