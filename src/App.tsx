@@ -10,6 +10,7 @@ import {
 import MainPage from './pages/MainPage';
 import BoxofficePage from './pages/BoxofficePage';
 import MovieInfoPage from './pages/MovieInfoPage';
+import PersonPage from './pages/PersonPage';
 
 library.add(faArrowUp, faArrowDown, faMinus);
 
@@ -22,8 +23,8 @@ const App: React.SFC<AppProps> = () => {
       <Route exact path="/boxoffice" component={BoxofficePage} />
       <Route exact path="/movie" component={MovieInfoPage} />
       <Route exact path="/movie/:movieCd" component={MovieInfoPage} />
-      <Route exact path="/company" rendered={() => console.log('company')} />
-      <Route exact path="/person" rendered={() => console.log('person')} />
+      <Route exact path="/person" component={PersonPage} />
+      <Route exact path="/person/:peopleCd" component={PersonPage} />
     </>
   );
 };

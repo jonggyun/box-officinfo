@@ -8,9 +8,13 @@ const Keyword = styled.input`
   height: 3.125rem;
   box-sizing: border-box;
   border: 0.3125rem solid #00796b;
-  font-size: 20px;
+  font-size: 1.25rem;
   :focus {
     outline: none;
+  }
+  ::placeholder {
+    font-size: 1rem;
+    text-indent: 0.625rem;
   }
 `;
 
@@ -30,6 +34,9 @@ const MovieComponent = styled.article`
   }
   a {
     color: inherit;
+  }
+  &:hover {
+    box-shadow: 2px 2px 10px 2px #000;
   }
 `;
 
@@ -82,6 +89,7 @@ const MovieInfoList: React.SFC<MovieInfoListProps> = ({
       <Keyword
         type="text"
         value={keyword}
+        placeholder="영화 제목을 입력해주세요."
         onChange={e => setKeyword(e.target.value)}
         onKeyPress={handleKeyPress}
       />

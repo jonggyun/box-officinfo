@@ -45,9 +45,9 @@ const MenuNavigator: React.FC<MenuNavigatorProps> = props => {
         <li>
           <Link to="/movie">영화정보</Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/company">영화사정보</Link>
-        </li>
+        </li> */}
         <li>
           <Link to="/person">영화인정보</Link>
         </li>

@@ -35,7 +35,7 @@ const MovieLi = styled.li`
     display: flex;
   }
   &:hover {
-    box-shadow: 3px 3px #000;
+    box-shadow: 2px 2px 10px 3px #000;
   }
 `;
 
