@@ -4,11 +4,15 @@
 
 API를 Client에서 불러와서 사용하였기에 Back-end는 따로 개발하지 않음.
 
+Live URL: https://heuristic-galileo-99c180.netlify.com
+
 > Goal
 
 typescript에 익숙해지기, typescript와 react를 함께 사용하기
 
 styled-components 익숙해지기
+
+netlify를 통한 deploy
 
 > Setting
 
