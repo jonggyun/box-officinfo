@@ -1,22 +1,22 @@
 # Box-officinfo
 
-[영화진흥위원회 OPEN API](http://www.kobis.or.kr/kobisopenapi/homepg/main/main.do)를 이용한 정적 페이지 프로젝트
+It is static SPA(Single Page Application) project using [KOBIS OPEN API](http://www.kobis.or.kr/kobisopenapi/homepg/main/main.do)
 
-API를 Client에서 불러와서 사용하였기에 Back-end는 따로 개발하지 않음.
+There is no Back-end server. because I call OPEN API in client.
 
 Live URL: https://heuristic-galileo-99c180.netlify.com
 
 > Goal
 
-typescript에 익숙해지기, typescript와 react를 함께 사용하기
+1. Get used to typescript and use typescript with reactjs.
 
-styled-components 익숙해지기
+2. Get used to styled-components
 
-netlify를 통한 deploy
+3. Deploy netlify
 
 > Setting
 
-CRA에서 제공하는 typescript kit을 사용해서 진행
+Use CRA(creat-react-app) typescript kit.
 
 ```
 npx create-react-app box-officinfo --typescript
@@ -24,7 +24,7 @@ npx create-react-app box-officinfo --typescript
 
 > How to use
 
-1. 프로젝트를 다운받고 패키지를 설치
+1. Download project and set up package use yarn.
 
 ```
 git clone https://github.com/jonggyun/box-officinfo
@@ -32,14 +32,14 @@ git clone https://github.com/jonggyun/box-officinfo
 yarn install
 ```
 
-2. root 경로에 .env 파일을 생성한 뒤 REACT_APP_API_KEY에 영화진흥위원회에서 받은 API 키를 입력
+2. Create .env file in you root path and enter REACT_APP_API_KEY that is KOBIS OPEN API in your .env file.
 
 ```
 NODE_PATH=src
 REACT_APP_API_KEY=your key
 ```
 
-3. 프로젝트를 실행
+3. Start project.
 
 ```
 yarn start
